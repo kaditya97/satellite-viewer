@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const SearchControls = ({
   collection,
@@ -9,9 +9,11 @@ const SearchControls = ({
   setEndDate,
   cloudCover,
   setCloudCover,
+  limit,
+  setLimit,
   loading,
   onSearch,
-  onClear
+  onClear,
 }) => {
   return (
     <div className="p-6 space-y-4 border-b border-gray-800">
@@ -20,7 +22,7 @@ const SearchControls = ({
         <label className="block text-sm font-medium text-gray-300 mb-2">
           Collection
         </label>
-        <select 
+        <select
           value={collection}
           onChange={(e) => setCollection(e.target.value)}
           className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -35,14 +37,14 @@ const SearchControls = ({
           Date Range
         </label>
         <div className="space-y-2">
-          <input 
-            type="date" 
+          <input
+            type="date"
             value={startDate}
             onChange={(e) => setStartDate(e.target.value)}
             className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
-          <input 
-            type="date" 
+          <input
+            type="date"
             value={endDate}
             onChange={(e) => setEndDate(e.target.value)}
             className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -51,33 +53,51 @@ const SearchControls = ({
       </div>
 
       {/* Cloud Cover */}
-      {(collection === 'sentinel-2-l2a' || collection === 'landsat-c2-l2') && (
+      {(collection === "sentinel-2-l2a" || collection === "landsat-c2-l2") && (
         <div>
           <label className="block text-sm font-medium text-gray-300 mb-2">
             Max Cloud Cover: {cloudCover}%
           </label>
-          <input 
-            type="range" 
+          <input
+            type="range"
             value={cloudCover}
             onChange={(e) => setCloudCover(e.target.value)}
-            min="0" 
-            max="100" 
-                        step="5"
+            min="0"
+            max="100"
+            step="5"
             className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer"
           />
         </div>
       )}
 
+      {/* Results Limit */}
+      <div>
+        <label className="block text-sm font-medium text-gray-300 mb-2">
+          Results per page
+        </label>
+        <select
+          value={limit}
+          onChange={(e) => setLimit(e.target.value)}
+          className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        >
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+      </div>
+
       {/* Action Buttons */}
       <div className="flex gap-3">
-        <button 
+        <button
           onClick={onSearch}
           disabled={loading}
           className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors disabled:bg-blue-800 disabled:cursor-not-allowed"
         >
-          {loading ? 'Searching...' : 'Search'}
+          {loading ? "Searching..." : "Search"}
         </button>
-        <button 
+        <button
           onClick={onClear}
           className="flex-1 px-4 py-2 bg-gray-700 text-white rounded-md hover:bg-gray-600 transition-colors"
         >
