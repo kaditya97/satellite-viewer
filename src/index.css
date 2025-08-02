@@ -1,0 +1,4 @@
+@import "ol/ol.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
